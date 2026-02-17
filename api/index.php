@@ -4,17 +4,15 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-// --- VERCEL RUNTIME FIX: CLEAR BOOTSTRAP CACHE ---
-// Vercel Build generates cache files with absolute paths (/vercel/...)
-// Runtime uses different paths (/var/task/...). We MUST delete them.
-$cacheDir = __DIR__ . '/../bootstrap/cache';
-$filesToDelete = ['packages.php', 'services.php', 'config.php', 'routes-v7.php'];
-
-foreach ($filesToDelete as $file) {
-    if (file_exists("$cacheDir/$file")) {
-        @unlink("$cacheDir/$file");
-    }
-}
+// --- VERCEL RUNTIME FIX: BYPASS BOOTSTRAP CACHE ---
+// Vercel filesystem is Read-Only. We cannot delete bad cache files.
+// Instead, we point Laravel to look for cache files in /tmp (which are empty).
+// This forces a fresh boot, ignoring the corrupt build-time cache.
+putenv('APP_SERVICES_CACHE=/tmp/services.php');
+putenv('APP_PACKAGES_CACHE=/tmp/packages.php');
+putenv('APP_CONFIG_CACHE=/tmp/config.php');
+putenv('APP_ROUTES_CACHE=/tmp/routes-v7.php');
+putenv('APP_EVENTS_CACHE=/tmp/events.php');
 // -------------------------------------------------
 
 // --- VERCEL ENV INJECTION START ---
