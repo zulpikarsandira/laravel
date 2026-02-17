@@ -4,22 +4,31 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NG-LOCO</title>
+    <title>NGALOCO</title>
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
 </head>
 
 <body
-    class="bg-gray-900 text-white flex items-center justify-center h-screen overflow-hidden cursor-pointer select-none">
+    class="bg-gray-900 text-white flex flex-col items-center justify-center h-screen overflow-hidden cursor-pointer select-none font-sans">
 
-    <div class="text-center pointer-events-none relative z-10">
-        <h1 class="text-9xl font-black uppercase tracking-tighter drop-shadow-lg animate-pulse text-red-600">
-            NG-LOCO
+    <div class="text-center relative z-10 px-4">
+        <!-- Main Title -->
+        <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tighter drop-shadow-lg text-white mb-2">
+            NGALOCO <span class="text-yellow-500">PAKE BUMBU</span> BATAGOR
         </h1>
-        <p class="text-2xl font-light tracking-widest mt-4 text-gray-400">
-            NGoding LOw COde
+
+        <!-- Subtitle -->
+        <p class="text-3xl font-light tracking-widest text-gray-300 mb-10 italic">
+            gass ngaloco
         </p>
+
+        <!-- Button -->
+        <button
+            class="px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-full shadow-lg transform transition hover:scale-105 active:scale-95 text-xl tracking-wide ring-4 ring-red-600/30">
+            KLIK TOMBOL INI UNTUK LANJUT 🚀
+        </button>
     </div>
 
 </body>
