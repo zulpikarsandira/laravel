@@ -25,10 +25,10 @@
         </p>
 
         <!-- Button -->
-        <button
-            class="px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-full shadow-lg transform transition hover:scale-105 active:scale-95 text-xl tracking-wide ring-4 ring-yellow-500/30">
+        <a href="/video"
+            class="px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-full shadow-lg transform transition hover:scale-105 active:scale-95 text-xl tracking-wide ring-4 ring-yellow-500/30 inline-block">
             KLIK TOMBOL INI UNTUK LANJUT
-        </button>
+        </a>
     </div>
 
 </body>
