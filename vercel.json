@@ -20,13 +20,5 @@
             "src": "/(.*)",
             "dest": "/api/index.php"
         }
-    ],
-    "env": {
-        "APP_ENV": "production",
-        "APP_DEBUG": "true",
-        "APP_URL": "https://ng-loco.vercel.app",
-        "APP_KEY": "base64:YOUR_APP_KEY_HERE_BUT_ADD_IT_IN_VERCEL_SETTINGS",
-        "DB_CONNECTION": "sqlite",
-        "DB_DATABASE": "/tmp/database.sqlite"
-    }
+    ]
 }
