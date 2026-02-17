@@ -4,6 +4,19 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
+// --- VERCEL RUNTIME FIX: CLEAR BOOTSTRAP CACHE ---
+// Vercel Build generates cache files with absolute paths (/vercel/...)
+// Runtime uses different paths (/var/task/...). We MUST delete them.
+$cacheDir = __DIR__ . '/../bootstrap/cache';
+$filesToDelete = ['packages.php', 'services.php', 'config.php', 'routes-v7.php'];
+
+foreach ($filesToDelete as $file) {
+    if (file_exists("$cacheDir/$file")) {
+        @unlink("$cacheDir/$file");
+    }
+}
+// -------------------------------------------------
+
 // --- VERCEL ENV INJECTION START ---
 // Inject critical env vars if missing (Fallback for Vercel)
 if (!getenv('APP_KEY')) {
@@ -27,7 +40,7 @@ if (!getenv('LOG_CHANNEL')) {
     putenv('LOG_CHANNEL=stderr');
 }
 if (!getenv('SESSION_DRIVER')) {
-    putenv('SESSION_DRIVER=cookie'); // Critical: Database session will crash if DB is missing
+    putenv('SESSION_DRIVER=cookie');
 }
 if (!getenv('CACHE_STORE')) {
     putenv('CACHE_STORE=array');
