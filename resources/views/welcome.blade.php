@@ -26,8 +26,8 @@
 
         <!-- Button -->
         <button
-            class="px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-full shadow-lg transform transition hover:scale-105 active:scale-95 text-xl tracking-wide ring-4 ring-red-600/30">
-            KLIK TOMBOL INI UNTUK LANJUT 🚀
+            class="px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-full shadow-lg transform transition hover:scale-105 active:scale-95 text-xl tracking-wide ring-4 ring-yellow-500/30">
+            KLIK TOMBOL INI UNTUK LANJUT
         </button>
     </div>
 
