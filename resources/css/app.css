@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* Custom CSS for Flying Text Animation */
+.flying-text {
+    position: fixed;
+    pointer-events: none;
+    transition: all 0.8s ease-in;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 50;
+}
+
+.flying-text.arrived {
+    top: 50% !important;
+    left: 50% !important;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+}
