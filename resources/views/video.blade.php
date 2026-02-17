@@ -18,24 +18,27 @@
     <!-- Video Container -->
     <div
         class="relative w-full max-w-4xl aspect-video bg-black rounded-lg shadow-2xl overflow-hidden border-4 border-yellow-500/50">
-        <video id="introVideo" class="w-full h-full object-cover" autoplay loop muted playsinline controls>
+        <video id="introVideo" class="w-full h-full object-cover" autoplay loop playsinline controls>
             <source src="{{ asset('videos/intro.mp4') }}" type="video/mp4">
             Browser Anda tidak mendukung tag video.
         </video>
     </div>
 
     <script>
-        // Force Autoplay Logic
-        document.addEventListener('DOMContentLoaded', function () {
+        // Force Autoplay Logic (With Sound Attempt)
+        document.addEventListener('DOMCon tentLoaded', function() {
             var video = document.getElementById('introVideo');
+            
+            // Try to play with sound
+            video.muted = false;
             var promise = video.play();
 
             if (promise !== undefined) {
                 promise.then(_ => {
-                    // Autoplay started!
+                    // Autoplay started with sound!
                 }).catch(error => {
-                    // Autoplay was prevented.
-                    // Show a "Play" button so user can start playback manually.
+                    // Browser blocked audio autoplay.
+                    // Fallback: Mute and play, then unmute on first interact             console.log("Autoplay with sound blocked. Fallback to muted.");
                     video.muted = true;
                     video.play();
                 });
