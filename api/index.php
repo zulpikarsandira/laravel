@@ -15,7 +15,19 @@ require __DIR__ . '/../vendor/autoload.php';
 // Bootstrap Laravel and handle the request...
 $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-// Set the storage path to /tmp for Vercel (Read-Only Filesystem Fix)
-$app->useStoragePath('/tmp');
+// --- VERCEL FIX START ---
+// Set storage path to /tmp (writable in Lambda)
+$storagePath = '/tmp/storage';
+$app->useStoragePath($storagePath);
+
+// Ensure storage subdirectories exist
+if (!is_dir($storagePath)) {
+    mkdir($storagePath, 0777, true);
+    mkdir($storagePath . '/framework/views', 0777, true);
+    mkdir($storagePath . '/framework/cache', 0777, true);
+    mkdir($storagePath . '/framework/sessions', 0777, true);
+    mkdir($storagePath . '/logs', 0777, true);
+}
+// --- VERCEL FIX END ---
 
 $app->handleRequest(Request::capture());
