@@ -21,6 +21,17 @@ if (!getenv('APP_DEBUG')) {
 if (!getenv('APP_URL')) {
     putenv('APP_URL=https://ng-loco.vercel.app');
 }
+
+// Force specific drivers to avoid DB/View dependency issues during boot
+if (!getenv('LOG_CHANNEL')) {
+    putenv('LOG_CHANNEL=stderr');
+}
+if (!getenv('SESSION_DRIVER')) {
+    putenv('SESSION_DRIVER=cookie'); // Critical: Database session will crash if DB is missing
+}
+if (!getenv('CACHE_STORE')) {
+    putenv('CACHE_STORE=array');
+}
 // --- VERCEL ENV INJECTION END ---
 
 // Determine if the application is in maintenance mode...
@@ -62,7 +73,20 @@ catch (\Throwable $e) {
     // Fallback error handler if Laravel fails to boot
     http_response_code(500);
     echo "<h1>🔥 Vercel Boot Error</h1>";
-    echo "<p><strong>Message:</strong> " . $e->getMessage() . "</p>";
-    echo "<p><strong>File:</strong> " . $e->getFile() . ":" . $e->getLine() . "</p>";
-    echo "<pre>" . $e->getTraceAsString() . "</pre>";
+
+    $count = 1;
+    do {
+        echo "<h2>Exception #{$count}</h2>";
+        echo "<p><strong>Message:</strong> " . $e->getMessage() . "</p>";
+        echo "<p><strong>Class:</strong> " . get_class($e) . "</p>";
+        echo "<p><strong>File:</strong> " . $e->getFile() . ":" . $e->getLine() . "</p>";
+
+        // Show truncated trace
+        $trace = explode("\n", $e->getTraceAsString());
+        echo "<pre>" . implode("\n", array_slice($trace, 0, 10)) . "\n... (truncated)</pre>";
+
+        echo "<hr>";
+        $e = $e->getPrevious();
+        $count++;
+    } while ($e);
 }
