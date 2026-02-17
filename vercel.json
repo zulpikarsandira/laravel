@@ -27,6 +27,8 @@
         "APP_URL": "https://ng-loco.vercel.app",
         "LOG_CHANNEL": "stderr",
         "DB_CONNECTION": "sqlite",
-        "DB_DATABASE": "/tmp/database.sqlite"
+        "DB_DATABASE": "/tmp/database.sqlite",
+        "SESSION_DRIVER": "cookie",
+        "CACHE_STORE": "array"
     }
 }
