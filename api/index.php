@@ -28,6 +28,12 @@ if (!is_dir($storagePath)) {
     mkdir($storagePath . '/framework/sessions', 0777, true);
     mkdir($storagePath . '/logs', 0777, true);
 }
+
+// Create empty database for Vercel (prevents "Database not found" errors)
+$dbPath = '/tmp/database.sqlite';
+if (!file_exists($dbPath)) {
+    touch($dbPath);
+}
 // --- VERCEL FIX END ---
 
 $app->handleRequest(Request::capture());
